@@ -1,0 +1,164 @@
+<div class="header-image">
+  <img
+    class="header-images"
+    src="assets/images/logo.png"
+    alt="Header Image"
+  />
+  <button (click)="goBack()" class="right-align">
+    <i class="fa fa-arrow-left"></i> Back
+  </button>
+</div>
+
+<div class="login-wrapper">
+  <div class="main-wrapper">
+    <div class="login-form">
+      <form [formGroup]="loginForm">
+        <div class="heading">
+          <span style="font-size: 22px; align-items: center">Login</span>
+        </div>
+
+        <div class="login-toggle">
+          <button
+            type="button"
+            [class.active]="loginType === 'mobile'"
+            (click)="setLoginType('mobile')"
+          >
+            Mobile Number
+          </button>
+          <button
+            type="button"
+            [class.active]="loginType === 'userName'"
+            (click)="setLoginType('userName')"
+          >
+            User Name
+          </button>
+        </div>
+
+        <div class="grid">
+          <div class="col-12" *ngIf="loginType === 'mobile'">
+            <div class="field-wrapper">
+              <label class="required">Mobile Number</label>
+              <div class="input-wrapper">
+                <input
+                  type="text"
+                  pKeyFilter="int"
+                  pInputText
+                  formControlName="mobileNumber"
+                  placeholder="Enter Mobile Number"
+                />
+              </div>
+              <small
+                class="error-message"
+                *ngIf="
+                  showError &&
+                  error === 'Mobile Number is required' &&
+                  loginType === 'mobile'
+                "
+              >
+                {{ error }}
+              </small>
+            </div>
+          </div>
+
+          <div class="col-12" *ngIf="loginType === 'userName'">
+            <div class="field-wrapper">
+              <label class="required">User Name</label>
+              <div class="input-wrapper">
+                <input
+                  type="text"
+                  pInputText
+                  placeholder="Enter UserName"
+                  formControlName="userName"
+                />
+              </div>
+              <small
+                class="error-message"
+                *ngIf="
+                  showError &&
+                  error === 'Username is required' &&
+                  loginType === 'userName'
+                "
+              >
+                {{ error }}
+              </small>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="field-wrapper">
+              <label class="required">Password</label>
+              <div class="input-wrapper">
+                <div
+                  class="password-wrapper"
+                  style="position: relative; display: flex; align-items: center"
+                >
+                  <input
+                    pInputText
+                    [type]="showPassword ? 'text' : 'password'"
+                    formControlName="password"
+                    autocomplete="one-time-code"
+                    placeholder="Enter Password"
+                    style="padding-right: 2.5rem; width: 100%"
+                  />
+
+                  <!-- Eye icon -->
+                  <i
+                    [ngClass]="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"
+                    style="position: absolute; right: 10px; cursor: pointer"
+                    (click)="togglePassword()"
+                  ></i>
+                </div>
+              </div>
+            </div>
+            <small
+              class="error-message"
+              *ngIf="showError && error === 'Password is required'"
+            >
+              {{ error }}
+            </small>
+          </div>
+
+          <div class="col-6">
+            <div class="field-wrapper">
+              <p-button
+                type="submit"
+                [label]="loadingFlag ? 'Please Wait..' : 'Login'"
+                [disabled]="loadingFlag"
+                (onClick)="login()"
+              >
+              </p-button>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="forgot-password">
+              <a href="javascript:void(0)" routerLink="/forgot-password"
+                >Forgot Password</a
+              >
+            </div>
+          </div>
+        </div>
+        <small class="error-message" *ngIf="loginError">{{ loginError }}</small>
+      </form>
+    </div>
+
+    <div class="center">
+      <div class="vertical-line"></div>
+      <h5 style="color: #178be9; padding: 8px 0; padding-left: 25px">♦</h5>
+      <div class="vertical-line1"></div>
+    </div>
+
+    <div class="login-google">
+      <div class="top-right-login">
+        <span class="create-account"
+          ><a routerLink="/create-resume-directly">Create Account</a></span
+        >
+      </div>
+      <div class="google-signup-section" style="text-align: center">
+        <div class="sign-with" style="font-size: 15px">Easy Login</div>
+        <div style="font-size: 20px">👇</div>
+       <img #googleImage src="assets/img/googleSignIn.png" alt="Google Login" id="google-btn"
+                style="  height: 40px; cursor: pointer; " (click)="onGoogleLogin()">  
+      </div>
+    </div>
+  </div>
+</div>

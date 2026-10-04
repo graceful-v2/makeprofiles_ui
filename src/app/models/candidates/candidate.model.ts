@@ -1,0 +1,47 @@
+import { Achievements } from "./achievements";
+import { Certificates } from "./certificates";
+import { CollegeProject } from "./college-project";
+import { DiplomaEducation } from "./diploma-education";
+import { Experience } from "./experiences";
+import { Qualification } from "./qualification";
+import { SchoolEducation } from "./schoolEducation";
+
+export interface Candidate {
+
+    id: number;
+    name: string;
+    mobileNumber: string;
+    email: string;
+    nationality: string;
+    gender: string;
+    languagesKnown: any;
+    fresher: boolean;
+    skills: any;
+    linkedIn: string;
+    dob: any;
+    address: any;
+    experiences: Array<Experience>;
+    qualification: Array<Qualification>;
+    certificates: Array<Certificates>;
+    achievements: Array<Achievements>;
+    collegeProject: Array<CollegeProject>;
+    maritalStatus: any;
+    softSkills: any;
+    coreCompentencies: any;
+    resumeFormatName: any;
+    coreCompentenciesMandatory: any;
+    softSkillsMandatory: any;
+    certificatesMandatory: any;
+    achievementsMandatory: any;
+    summary: any;
+    careerObjective: any;
+    fatherName: any;
+    hobbies: any;
+    schoolEducation: Array<SchoolEducation>;
+    diplomaEducation: Array<DiplomaEducation>;
+    strengths: any;
+    goals: any;
+    extraCurricularActivities: any;
+
+
+}

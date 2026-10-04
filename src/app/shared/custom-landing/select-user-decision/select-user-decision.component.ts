@@ -1,0 +1,53 @@
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-select-user-decision',
+  standalone: false,
+  templateUrl: './select-user-decision.component.html',
+  styleUrl: './select-user-decision.component.css',
+})
+export class SelectUserDecisionComponent {
+  constructor(private router: Router) { }
+  ngOnInit() { }
+
+  private isMobileDevice(): boolean {
+    const userAgent =
+      navigator.userAgent || navigator.vendor || (window as any).opera;
+    return /android|iphone|ipad|ipod/i.test(userAgent);
+  }
+
+  goToFresher() {
+
+    localStorage.setItem('isFresher', 'true');
+
+    const sourse = this.isMobileDevice();
+
+    if (sourse) {
+      this.router.navigate(['resume-templates']);
+    } else {
+      this.router.navigate(['select-template']);
+    }
+  }
+
+  goToExperience() {
+    localStorage.setItem('isFresher', 'false');
+    const sourse = this.isMobileDevice();
+
+    if (sourse) {
+      this.router.navigate(['resume-templates']);
+    } else {
+      this.router.navigate(['select-template']);
+    }
+  }
+
+  goBack() {
+    const sourse = this.isMobileDevice();
+    if (sourse) {
+      this.router.navigate(['']);
+    }
+    else {
+      this.router.navigate(['']);
+    }
+  }
+}

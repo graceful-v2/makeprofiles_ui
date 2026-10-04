@@ -1,0 +1,25 @@
+.forgot-password-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 95vh;
+    margin-left: 18px;
+}
+
+.login a {
+    font-size: 14px;
+    color: #2196F3;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.login a:hover {
+    text-decoration: underline;
+}
+
+.button-group {
+    display: flex;
+    gap: 20px;
+}

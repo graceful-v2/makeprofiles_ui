@@ -1,0 +1,483 @@
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <!-- <div *ngIf="!isMobile">
+    <a href="#select-template" class="header-hero">Create Resume →</a>
+  </div> -->
+  <div class="header-login">
+    <a href="#login" class="herologin-btn">Login</a>
+    <a href="#create-resume-directly" class="herologin-btn">Create Account</a>
+    <a href="https://www.hurecom.com/#/login" target="_blank" rel="noopener noreferrer" class="herologin-btn">
+    Login as Employer
+  </a>
+</div>
+</header>
+
+<!-- Floating Create Resume Button -->
+<div class="floating-create-resume" (click)="selectTemplates()">
+  <img src="assets/images/create_resume.png" alt="Create Resume" />
+</div>
+
+<section class="hero-section">
+  <div
+    class="make-profile-image"
+    appScrollFade
+    [animationDuration]="1000"
+    [animationDelay]="500"
+    [translateY]="'100px'"
+  >
+    <img
+      src="assets/images/logo.png"
+      alt="AI Resume Builder Illustration"
+      (click)="toCreateResume()"
+    />
+  </div>
+  <div class="container">
+    <div
+      class="hero-content"
+      appScrollAnimatesection4
+      [animationName]="'fadeInLeft'"
+      [animationDuration]="1200"
+      [animationDelay]="200"
+    >
+      <h5 class="u-text u-text-default u-text-1"></h5>
+      <br />
+      <h5>🚀 Create a resume to impress the interviewer</h5>
+
+      <h1>
+        Build your future with a globally
+        <span>recognized resume in minutes</span>
+      </h1>
+
+      <p class="amount-content">
+        <strong>ATS-optimized, HR’s choice resume</strong>
+        for only
+        <span
+          style="
+            color: #f70d09;
+            font-weight: 900;
+            font-family: 'Montserrat';
+            letter-spacing: 0.1cap;
+          "
+          >₹10</span
+        >
+      </p>
+
+      <a href="#choose-direction" class="hero-btn">Create Resume →</a>
+
+      <p>
+        <small
+          >Instant AI creation • Up to 5 free edits • ATS-friendly
+          templates</small
+        >
+      </p>
+    </div>
+
+    <div
+      class="hero-image"
+      appScrollAnimatesection4
+      [animationName]="'fadeInRight'"
+      [animationDuration]="1200"
+      [animationDelay]="200"
+    >
+      <img
+        src="assets/images/newRobot2.png"
+        alt="AI Resume Builder Illustration"
+        (click)="toCreateResume()"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="template-section">
+  <h2 class="section-title">Explore Our Resume Templates</h2>
+
+  <div class="content-column">
+    <div class="category-wrapper">
+      <!-- LEFT ARROW -->
+      <button class="nav-btn left" (click)="scrollLeft()">&#10094;</button>
+
+      <div class="category-mask">
+        <div class="category-scroll" #scrollContainer>
+          <div
+            class="category-item"
+            *ngFor="let category of categories"
+            [class.active]="selectedCategory === category"
+            (click)="selectCategory(category)"
+          >
+            {{ category }}
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT ARROW -->
+      <button class="nav-btn right" (click)="scrollRight()">&#10095;</button>
+    </div>
+  </div>
+
+  <div class="swiper-container-wrapper">
+    <swiper-container
+      class="mySwiper"
+      slides-per-view="4"
+      space-between="20"
+      navigation="true"
+      loop="true"
+      autoplay-delay="1500"
+      autoplay-disable-on-interaction="false"
+      grab-cursor="true"
+      speed="500"
+      breakpoints='{
+        "320": { "slidesPerView": 1 },
+        "640": { "slidesPerView": 2 },
+        "1024": { "slidesPerView": 3 },
+        "1440": { "slidesPerView": 4 }
+      }'
+    >
+      <swiper-slide *ngFor="let template of resumePaths">
+        <div class="template-card">
+          <h4>{{ template.templateName }}</h4>
+          <img
+            [src]="template.templateLocation"
+            [alt]="template.templateName"
+            (click)="selectTemplate(template.templateName)"
+          />
+          <button
+            class="select-btn"
+            (click)="selectTemplate(template.templateName)"
+          >
+            Select
+          </button>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+</section>
+
+<section
+  class="u-clearfix u-container-align-left u-valign-middle u-section-12"
+  id="sec-ea29"
+>
+  <div
+    class="data-layout-selected u-clearfix u-expanded-width u-gutter-30 u-layout-wrap u-layout-wrap-1"
+  >
+    <div class="u-layout">
+      <div class="u-layout-col">
+        <div class="u-size-30 section12">
+          <div class="u-layout-row">
+            <div
+              class="u-container-align-center u-container-style u-image u-image-round u-layout-cell u-radius u-size-40 u-image-2"
+              data-image-width="2000"
+              data-image-height="1333"
+              appScrollAnimatesection4
+              [animationName]="'fadeInLeft'"
+              [animationDuration]="1200"
+              [animationDelay]="200"
+            >
+              <div class="u-container-layout u-container-layout-4"></div>
+            </div>
+
+            <div
+              class="u-container-style u-grey-5 u-layout-cell u-radius u-shape-round u-size-20 u-layout-cell-3 backstage animated"
+              appScrollAnimatesection4
+              [animationName]="'fadeInRight'"
+              [animationDuration]="1200"
+              [animationDelay]="200"
+            >
+              <div class="hero-content" style="padding: 25px">
+                <h1>Create Your <span>Resume</span> and Apply for Jobs</h1>
+
+                <a href="#select-template" class="custom-create"
+                  >Start Your Career</a
+                >
+
+                <p>
+                  Build a professional resume in minutes and apply for the right
+                  jobs that match your skills. Let AI make your job search
+                  simple and faster.
+                </p>
+
+                <ul class="herosection-ul" style="line-height: 2">
+                  <li>✅ Create your resume with smart AI help</li>
+                  <li>✅ Find and apply for matched job openings</li>
+                  <li>✅ Take the next step toward your dream career</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 
+<section class="hero-section">
+  <div class="container">
+    <div
+      class="earn-content"
+      appScrollAnimatesection4
+      [animationName]="'fadeInLeft'"
+      [animationDuration]="1200"
+      [animationDelay]="200"
+    >
+      <h5>💰 Create, Earn & Grow with Make Profiles</h5>
+
+      <h1>💸 Refer <span>& Earn Rewards</span></h1>
+
+      <a href="#/login" class="hero-btn">Refer and Earn 💸</a>
+
+      <div class="rewardssection" style="margin-top: 40px">
+        <h5>🎉 Up to 5 Referrals</h5>
+        <p>
+          <strong>₹5 Cash</strong> for each of your first 5 referrals — share
+          and start earning instantly!
+        </p>
+
+        <h5>🚀 5–10 Referrals</h5>
+        <p>
+          <strong>₹7 Cash</strong> for each referral from your 6th to 10th
+          invite — boost your rewards as you grow!
+        </p>
+
+        <h5>💎 10+ Referrals</h5>
+        <p>
+          <strong>₹10 Cash</strong> for every referral after 10 — premium level
+          rewards for top referrers!
+        </p>
+
+        <p></p>
+      </div>
+    </div>
+
+    <div
+      class="hero-image"
+      appScrollAnimatesection4
+      [animationName]="'fadeInRight'"
+      [animationDuration]="1200"
+      [animationDelay]="200"
+    >
+      <img
+        src="assets/images/refer-and-earn.png"
+        alt="AI Resume Builder Illustration"
+      />
+    </div>
+  </div>
+</section> -->
+
+<section class="u-clearfix u-valign-middle u-section-1" id="sec-7e2e">
+  <div
+    class="data-layout-selected u-clearfix u-expanded-width u-gutter-30 u-layout-wrap u-layout-wrap-1"
+  >
+    <div class="u-gutter-0 u-layout">
+      <div class="u-layout-col">
+        <div class="u-size-30">
+          <div class="u-layout-row">
+            <div
+              class="u-container-style u-grey-5 u-layout-cell u-radius u-shape-round u-size-40 u-layout-cell-1 animated flipInX-played"
+              appScrollAnimatesection1
+              [animationName]="'flipInY'"
+              [animationDuration]="2200"
+              [animationDelay]="0"
+            >
+              <div
+                class="u-container-layout u-valign-middle u-container-layout-1"
+              >
+                <h1 class="u-text u-text-default u-text-2">
+                  The Smartest Way to Build Your Resume
+                </h1>
+                <p class="u-text u-text-3">
+                  Instantly create an AI-powered, professional, and
+                  ATS-optimized resume. Enter your details—download your dream
+                  resume In minutes. No hassle, no complex steps—just results
+                  you can trust for only
+                  <span style="color: #ff5e38; font-weight: bold">₹10</span>.
+                </p>
+                <a
+                  href="#select-template"
+                  class="u-btn u-button-style u-btn-1"
+                  style="font-weight: 600"
+                  >Get Started Now</a
+                >
+                <p
+                  class="u-text u-text-4"
+                  style="margin-top: 14px; font-size: 1rem; color: #eff2f4"
+                >
+                  Up to 5 edits included. Supercharge your job search instantly.
+                </p>
+              </div>
+            </div>
+            <div
+              class="u-container-style u-image u-image-round u-layout-cell u-radius u-size-20 u-image-1"
+              data-image-width="771"
+              data-image-height="1156"
+              appScrollAnimatesection1
+              [animationName]="'flipInX'"
+              [animationDuration]="2200"
+              [animationDelay]="0"
+            >
+              <div class="u-container-layout u-container-layout-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section
+  class="skrollable u-clearfix u-image u-parallax u-section-3 skrollable-after"
+  id="sec-6acf"
+  data-bottom-top="background-position: 50% 0vh;"
+  data-top-bottom="background-position: 50% -20vh"
+  style="
+    background-attachment: fixed;
+    background-position: 50% -20vh;
+    border-radius: 50px;
+  "
+>
+  <div class="u-clearfix u-sheet u-sheet-1"></div>
+</section>
+
+<section class="hero-section">
+  <h2 class="herosection-h2headding">AI Impact on Resume</h2>
+  <div class="container herosection-con">
+    <div
+      class="hero-image"
+      appScrollAnimatesection4
+      [animationName]="'fadeInRight'"
+      [animationDuration]="1200"
+      [animationDelay]="200"
+    >
+      <img
+        src="assets/images/Ai-image.png"
+        alt="AI Resume Builder Illustration"
+      />
+    </div>
+
+    <div
+      class="hero-content"
+      appScrollAnimatesection4
+      [animationName]="'fadeInLeft'"
+      [animationDuration]="1200"
+      [animationDelay]="200"
+    >
+      <h5>🤖 Smart AI. Smarter Resumes.</h5>
+
+      <h1>AI that <span>perfects your words</span></h1>
+
+      <a href="#select-template" class="custom-create">Build with AI</a>
+
+      <p>
+        Let AI instantly create the
+        <strong>perfect summary, objectives,</strong> and
+        <strong>key skills</strong> that fit your dream job — clear, confident,
+        and recruiter-ready.
+      </p>
+
+      <ul class="herosection-ul" style="line-height: 2">
+        <li>
+          ✅ AI-written <strong>career summary</strong> highlighting your
+          strengths
+        </li>
+        <li>
+          ✅ Job-specific <strong>objectives</strong> aligned with your target
+          roles
+        </li>
+        <li>
+          ✅ Smartly selected <strong>key skills</strong> optimized for ATS
+        </li>
+        <li>✅ Real-time <strong>content improvement suggestions</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section
+  class="skrollable u-clearfix u-container-align-center u-valign-top-md u-valign-top-sm u-valign-top-xs u-section-7"
+  id="sec-644e"
+>
+  <div
+    class="data-layout-selected u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1"
+  >
+    <div class="u-layout">
+      <div class="u-layout-row">
+        <div
+          class="u-container-align-left u-container-style u-layout-cell u-size-30 u-layout-cell-1"
+        >
+          <div class="u-container-layout u-valign-top u-container-layout-1">
+            <h2 class="u-align-left u-text u-text-1">Digital AI Assistants</h2>
+            <h4 class="u-align-left u-text u-text-2">
+              Improve your chances of getting shortlisted.
+            </h4>
+          </div>
+        </div>
+        <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
+          <div class="u-container-layout u-valign-bottom u-container-layout-2">
+            <p class="u-align-left u-text u-text-4">
+              🧠 AI Resume – Create Your Perfect Resume In Minutes Build
+              <br />
+              Your professional resume instantly with the power of AI. Get smart
+              suggestions for career objectives, skills, and achievements — all
+              tailored to your dream job.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="skrollable u-container-style u-expanded-width u-gradient u-group u-image u-parallax u-radius u-shape-round u-image-1 skrollable-after"
+    data-image-width="2902"
+    data-image-height="1632"
+    data-bottom-top="background-position: 50% 0vh;"
+    data-top-bottom="background-position: 50% -20vh"
+    style="background-attachment: fixed; background-position: 50% -20vh"
+  >
+    <div class="u-container-layout u-container-layout-3"></div>
+  </div>
+</section>
+
+<section class="ai-impact-section u-clearfix" id="refer-earn">
+  <div
+    class="ai-cards-row"
+    style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap"
+  >
+    <div
+      class="ai-card animated"
+      appScrollFade
+      [animationDuration]="1000"
+      [animationDelay]="0"
+      [translateY]="'100px'"
+    >
+      <!-- <span class="ai-icon"> </span> -->
+      <h5>Address</h5>
+      <p>
+        Graceful Technologies Private Limited <br />
+        Greeta Towers, Wingspace, 1st floor,<br />
+        Perungudi. Chennai- 600096, Tamil Nadu, India
+      </p>
+    </div>
+
+    <div
+      class="ai-card animated"
+      appScrollFade
+      [animationDuration]="1500"
+      [animationDelay]="500"
+      [translateY]="'100px'"
+    >
+      <!-- <span class="ai-icon"> </span> -->
+      <h5>Contact</h5>
+      <p style="text-align: left">
+        <i class="bi bi-envelope"></i>&nbsp;<strong> Email Us:</strong>
+        contact&#64;gracefultechnologies.com<br />
+        <br />
+        <i class="bi bi-phone"></i>&nbsp; <strong>Call Us :</strong> +91 44 2496
+        5109
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="u-align-center u-clearfix u-footer" id="sec-footer">
+  <div class="u-clearfix u-sheet u-sheet-1">
+    <p>© 2025 Makeprofiles</p>
+  </div>
+</footer>

@@ -1,0 +1,21 @@
+<div #resumeContainer class="resume-container">
+  <img   *ngIf="currentResume" #resumeImage [src]="currentResume" class="resume-image" />
+
+  <div class="arrow-controls">
+    <button (click)="prevResume()" class="arrow-btn">⬅️</button>
+    <button (click)="nextResume()" class="arrow-btn">➡️</button>
+  </div>
+</div>
+
+<div class="tick-icon">
+  <div>
+    <span class="template">&nbsp;Choose Template&nbsp;</span>
+  </div>
+  <div>
+    <span class="type">&nbsp;{{ currentResumePageType }}&nbsp;</span>
+  </div>
+</div>
+
+<button class="create-resume-btn" *ngIf="currentResumeName" (click)="toVerify(currentResumeName)">
+  Select
+</button>

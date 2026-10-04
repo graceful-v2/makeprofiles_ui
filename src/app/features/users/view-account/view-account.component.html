@@ -1,0 +1,63 @@
+<div class="page-container">
+
+<div class="header-image">
+  <img class="header-images" src="assets/images/logo.png" alt="Header Image" />
+  <p-button (onClick)="goBack()" label="Back" class="right-align-btn "></p-button>
+</div>
+
+<div class="wrapper">
+  <div class="heading">
+    <span>My Account</span>
+
+    <button (click)="editOut()" class="right-align">Edit User</button>
+  </div>
+  <div class="profile-wrapper">
+    <div class="grid grid-nogutter account-info light-backgroud move-content-center  ">
+      <div class="col-2">
+        <label>Name</label>
+      </div>
+      <div class="col-5">
+        {{user?.name}}
+      </div>
+    </div>
+    <div class="grid grid-nogutter account-info move-content-center ">
+      <div class="col-2">
+        <label>User Name</label>
+      </div>
+      <div class="col-5">
+        {{user?.userName}}
+      </div>
+    </div>
+    <div class="grid grid-nogutter account-info light-backgroud move-content-center ">
+      <div class="col-2">
+        <label>Email</label>
+      </div>
+      <div class="col-5">
+        {{user?.email}}
+      </div>
+    </div>
+    <div class="grid grid-nogutter account-info  move-content-center ">
+      <div class="col-2">
+        <label>Contact</label>
+      </div>
+      <div class="col-5">
+        {{user?.mobileNumber}}
+      </div>
+    </div>
+    <div class="grid grid-nogutter account-info light-backgroud move-content-center ">
+      <div class="col-2">
+        <label>Password</label>
+      </div>
+      <div class="col-5" style="display: flex; align-items: center; ">
+        <span>
+          {{ showPassword ? user?.password : '••••••••' }}
+        </span>
+        <button type="button" (click)="togglePassword()"
+          style="background: none; border: none; margin-left: 10px; cursor: pointer;">
+          <i [ngClass]="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+        </button>
+      </div>
+
+    </div>
+
+    </div>

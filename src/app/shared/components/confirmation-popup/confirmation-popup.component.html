@@ -1,0 +1,28 @@
+<div class="refer-popup">
+  <div class="refer-content">
+    <button class="close-btn" (click)="ClosePopup()">Close</button>
+
+    <span class="popup-icon">Sorry...</span>
+
+    <div class="popup-title">
+      <div>You have chosen</div>
+    </div>
+
+    <span class="popup-subtitle"> Single Page Resume </span>
+
+    <span class="popup-message">
+      Your resume is longer than <b style="font-style: italic">one page</b>.
+      Please review it and shorten or adjust the details so it fits on a
+      <b style="font-style: italic">single page.</b>
+    </span>
+
+    <div class="button-types">
+      <button class="common-btn change-template-btn" (click)="ChangeTemplate()">
+        Change to Multiple Page
+      </button>
+      <button class="common-btn edit-btn" (click)="EditContent()">
+        Edit Content
+      </button>
+    </div>
+  </div>
+</div>

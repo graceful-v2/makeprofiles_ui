@@ -1,0 +1,76 @@
+<div class="profile-wrapper">
+  <div class="header-contents">
+    <div>
+      <button class="back-btn" (click)="goBack()">← Back</button>
+    </div>
+    <div>
+      <h2 class="resume-header">Choose Template</h2>
+    </div>
+  </div>
+
+  <div class="selectedType">
+    <button
+      class="single-page"
+      type="button"
+      (click)="selectedType('All Page')"
+      [class.active]="selected === 'All Page'"
+    >
+      All Page
+    </button>
+    <button
+      class="single-page"
+      type="button"
+      (click)="selectedType('Single Page')"
+      [class.active]="selected === 'Single Page'"
+    >
+      Single Page
+    </button>
+    <button
+      class="multiple-page"
+      type="button"
+      (click)="selectedType('Multiple Page')"
+      [class.active]="selected === 'Multiple Page'"
+    >
+      Multiple Page
+    </button>
+  </div>
+</div>
+
+<div class="selectedType">
+  <div class="content-column">
+    <div class="category-wrapper">
+      <button class="nav-btn left" (click)="scrollLeft()">&#10094;</button>
+
+      <div class="category-mask">
+        <div class="category-scroll" #scrollContainer>
+          <div
+            class="category-item"
+            *ngFor="let category of categories"
+            [class.active]="selectedCategory === category"
+            (click)="selectCategory(category)"
+          >
+            {{ category }}
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT ARROW -->
+      <button class="nav-btn right" (click)="scrollRight()">&#10095;</button>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="resume-gallery">
+    <div class="resume-card" *ngFor="let resume of resumePaths">
+      <img
+        [src]="resume.templateLocation"
+        (click)="navigateToMainpage(resume.templateName)"
+        [alt]="resume.templateName"
+      />
+      <div class="resume-info">
+        <h3>{{ resume.templateName }} - {{ resume.templateType }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
