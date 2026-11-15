@@ -30,7 +30,10 @@ jobs:
         run: npm ci
 
       - name: Install Rollup Linux optional binary workaround
-        run: npm install --no-save --package-lock=false --include=optional --legacy-peer-deps @rollup/rollup-linux-x64-gnu@4.22.4
+        run: |
+          npm install --no-save --package-lock=false --include=optional --legacy-peer-deps @rollup/rollup-linux-x64-gnu@4.22.4
+          npm install --no-save --package-lock=false --legacy-peer-deps --no-audit --no-fund typescript@5.5.4
+          npx tsc --version
 
       - name: Build Angular production
         run: |
@@ -49,9 +52,9 @@ jobs:
           SSH_KNOWN_HOSTS: ${{ secrets.PROD_KNOWN_HOSTS }}
         run: |
           install -m 700 -d ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          printf '%s\\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          printf '%s\\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
 
       - name: Upload production build
         env:
@@ -59,9 +62,9 @@ jobs:
           PROD_USER: ${{ secrets.PROD_USER }}
           PROD_SSH_PORT: ${{ secrets.PROD_SSH_PORT }}
         run: |
-          scp -i ~/.ssh/deploy_key -P "$PROD_SSH_PORT" \
-            -o StrictHostKeyChecking=yes \
-            "$RUNNER_TEMP/make-profile-ui.zip" \
+          scp -i ~/.ssh/deploy_key -P "$PROD_SSH_PORT" \\
+            -o StrictHostKeyChecking=yes \\
+            "$RUNNER_TEMP/make-profile-ui.zip" \\
             "$PROD_USER@$PROD_HOST:C:/Apps/make-profile-ui-staging/release.zip"
 
       - name: Deploy with backup
@@ -73,10 +76,10 @@ jobs:
         run: |
           cat > "$RUNNER_TEMP/deploy.ps1" <<'POWERSHELL'
           $ErrorActionPreference = 'Stop'
-          $archive = 'C:\Apps\make-profile-ui-staging\release.zip'
-          $extract = 'C:\Apps\make-profile-ui-staging\release'
-          $live = 'C:\nginx-1.29.8\html\make-profile'
-          $backupDir = 'C:\Apps\make-profile-ui-backup'
+          $archive = 'C:\\Apps\\make-profile-ui-staging\\release.zip'
+          $extract = 'C:\\Apps\\make-profile-ui-staging\\release'
+          $live = 'C:\\nginx-1.29.8\\html\\make-profile'
+          $backupDir = 'C:\\Apps\\make-profile-ui-backup'
 
           if (!(Test-Path $archive)) { throw "Deployment archive not found: $archive" }
           if (Test-Path $extract) { Remove-Item $extract -Recurse -Force }
@@ -102,7 +105,7 @@ jobs:
           POWERSHELL
 
           ENCODED_COMMAND=$(iconv -f UTF-8 -t UTF-16LE "$RUNNER_TEMP/deploy.ps1" | base64 -w 0)
-          ssh -i ~/.ssh/deploy_key -p "$PROD_SSH_PORT" \
-            -o StrictHostKeyChecking=yes \
-            "$PROD_USER@$PROD_HOST" \
+          ssh -i ~/.ssh/deploy_key -p "$PROD_SSH_PORT" \\
+            -o StrictHostKeyChecking=yes \\
+            "$PROD_USER@$PROD_HOST" \\
             "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand $ENCODED_COMMAND"
